@@ -5,7 +5,7 @@ int ft_is_num(char ch, char *base)
 	int i;
 
 	i = 0;
-	while(*base)
+	while(*base++)
 	{
 		if (ch == base[i])
 			return (1);
@@ -19,7 +19,7 @@ int ft_get_len_str(char *str, char *base)
 	int len;
 
 	len = 0;
-	while (ft_is_num(*str, base))
+	while (ft_is_num(*str++, base))
 	{
 		len++;
 	}
@@ -50,7 +50,7 @@ int ft_process_num(char *str, char *base)
 
 	len_str = ft_get_len_str(str, base);
 	len_base = 0;
-	while (*base)
+	while (*base++)
 	{
 		len_base++;
 	}
