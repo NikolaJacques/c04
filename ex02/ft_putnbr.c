@@ -10,12 +10,12 @@ void ft_recursive(long nb)
 {
 	if (nb / 10 == 0)
 	{
-		ft_putchar((char)nb);
+		ft_putchar((char)nb + 48);
 	}
 	else
 	{
-		ft_recursive((int)nb / 10);
-		ft_putchar((int)nb % 10);
+		ft_recursive(nb / 10);
+		ft_recursive(nb % 10);
 	}
 }
 
@@ -29,18 +29,10 @@ void ft_putnbr(int nb)
 		ft_putchar('-');
 		temp *= -1;
 	}
-	if (temp / 10 == 0)
-	{
-		ft_putchar((char)temp);
-	}
-	else
-	{
-		ft_recursive(temp / 10);
-		ft_putchar((char)(temp % 10));
-	}
+	ft_recursive(temp);
 }
 
 int main(void)
 {
-	ft_putnbr(-12345);
+	ft_putnbr(-2147483648);
 }

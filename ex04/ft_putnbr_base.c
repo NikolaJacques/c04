@@ -1,34 +1,58 @@
-/* ft_error_handling(char *base)
+#include <unistd.h>
+
+void ft_putchar(char ch)
+{
+	write(1, &ch, 1);
+}
+
+void convert_print(long nb, char *base)
+{
+	ft_putchar(base[nb]);
+}
+
+int len_base(char *base)
 {
 	int i;
-	int j;
 
 	i = 0;
 	while(base[i])
 	{
-		if (base[i] == '+' || base[i] == '-')
-			return (0);
-		j = i + 1;
-		while (base[j])
-		{
-			if (base[j] == base[i])
-				return (0);
-			j++;
-		}
 		i++;
 	}
-	if (i < 1)
-		return (0);
-	return (1);
+	return (i);
 }
 
-char ft_convert(int c, char *base, int len)
+void ft_recursive(long nb, char *base, int len_b)
 {
-	return (0);
+	if (nb / len_b == 0)
+	{
+		convert_print(nb, base);
+	}
+	else
+	{
+		ft_recursive(nb / len_b, base, len_b);
+		ft_recursive(nb % len_b, base, len_b);
+	}
 }
 
 void ft_putnbr_base(int nbr, char *base)
 {
-	if (!ft_error_handling(base))
-		return (0);
-} */
+	long temp;
+	int len_b;
+	
+	temp = nbr;
+	if (temp < 0)
+	{
+		ft_putchar('-');
+		temp *= -1;
+	}
+	len_b = len_base(base);
+	ft_recursive(temp, base, len_b);
+}
+
+int main(void)
+{
+	ft_putnbr_base(42, "01");
+	ft_putnbr_base(42, "0123456789ABCDEF");
+	ft_putnbr_base(42, "poneyvif");
+}
