@@ -1,4 +1,4 @@
-int ft_strlen(char *str)
+int fct_strlen(char *str)
 {
 	int len;
 
@@ -14,12 +14,6 @@ void ft_putstr(char *str)
 {
 	int len;
 
-	len = ft_strlen(str);
+	len = fct_strlen(str);
 	write(1, str, len);
-}
-
-int main(void)
-{
-	char *str = "Some string";
-	ft_putstr(str);
 }

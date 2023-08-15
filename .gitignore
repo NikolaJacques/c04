@@ -1,0 +1,5 @@
+*/*.out
+*.out
+common.h
+compile.sh
+main.c

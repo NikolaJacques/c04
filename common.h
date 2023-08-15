@@ -1,3 +1,11 @@
+int ft_strlen(char *str);
+void ft_putstr(char *str);
 void ft_putnbr(int nb);
 int ft_atoi(char *str);
-// void ft_putnbr_base(int nbr, char *base);
+void ft_putnbr_base(int nbr, char *base);
+int ft_is_num(char ch, char *base);
+int ft_get_len_str(char *str, char *base);
+int ft_convert(char ch, char *base, int len_base);
+int ft_process_num(char *str, char *base);
+int ft_atoi_base(char *str, char *base);
+int ft_atoi_base(char *str, char *base);

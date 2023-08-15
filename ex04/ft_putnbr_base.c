@@ -49,10 +49,3 @@ void ft_putnbr_base(int nbr, char *base)
 	len_b = len_base(base);
 	ft_recursive(temp, base, len_b);
 }
-
-int main(void)
-{
-	ft_putnbr_base(42, "01");
-	ft_putnbr_base(42, "0123456789ABCDEF");
-	ft_putnbr_base(42, "poneyvif");
-}

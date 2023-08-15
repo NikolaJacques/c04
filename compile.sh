@@ -1,1 +1,1 @@
-gcc -Wall -Wextra -Werror *.c */*.c && ./a.out #&& norminette -R  */*
+gcc -Wall -Wextra -Werror *.c */*.c && ./a.out && norminette -R  */*
