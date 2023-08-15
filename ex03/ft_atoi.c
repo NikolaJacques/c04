@@ -1,12 +1,24 @@
-int is_num(char c)
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nikjacqu <nikjacqu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/15 20:40:06 by nikjacqu          #+#    #+#             */
+/*   Updated: 2023/08/15 20:42:16 by nikjacqu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+int	is_num(char c)
 {
 	return (c >= '0' && c <= '9');
 }
 
-int process_num(char *str)
+int	process_num(char *str)
 {
-	double multiplier;
-	double total;
+	double	multiplier;
+	double	total;
 
 	multiplier = 1;
 	total = 0;
@@ -20,22 +32,21 @@ int process_num(char *str)
 	return ((int)total);
 }
 
-
 int	ft_atoi(char *str)
 {
-		int result;
-		int negative;
+	int	result;
+	int	negative;
 
-		result = 0;
-		negative = 1;
-		while (!is_num(*str))
+	result = 0;
+	negative = 1;
+	while (!is_num(*str))
+	{
+		if (*str == '-')
 		{
-			if (*str == '-')
-			{
-				negative *= -1;
-			}
-			str++;
+			negative *= -1;
 		}
-		result = process_num(str);
-		return (result * negative);
+		str++;
+	}
+	result = process_num(str);
+	return (result * negative);
 }

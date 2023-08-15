@@ -1,6 +1,18 @@
-int ft_is_num(char ch, char *base)
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi_base.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nikjacqu <nikjacqu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/15 20:43:30 by nikjacqu          #+#    #+#             */
+/*   Updated: 2023/08/15 20:45:04 by nikjacqu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+int	ft_is_num(char ch, char *base)
 {
-	while(*base)
+	while (*base)
 	{
 		if (ch == *base)
 			return (1);
@@ -9,9 +21,9 @@ int ft_is_num(char ch, char *base)
 	return (0);
 }
 
-int ft_get_len_str(char *str, char *base)
+int	ft_get_len_str(char *str, char *base)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	while (ft_is_num(*str, base))
@@ -22,28 +34,27 @@ int ft_get_len_str(char *str, char *base)
 	return (len);
 }
 
-int ft_convert(char ch, char *base, int len_base)
+int	ft_convert(char ch, char *base, int len_base)
 {
-	int i;
+	int	i;
 
 	i = 0;
-
 	while (i < len_base)
 	{
 		if (base[i] == ch)
-			break;
+			break ;
 		i++;
 	}
 	return (i);
 }
 
-int ft_process_num(char *str, char *base)
+int	ft_process_num(char *str, char *base)
 {
-	int multiplier;
-	int total;
-	int len_base;
-	int len_str;
-	int i;
+	int	multiplier;
+	int	total;
+	int	len_base;
+	int	len_str;
+	int	i;
 
 	i = 0;
 	len_str = ft_get_len_str(str, base);
@@ -65,21 +76,21 @@ int ft_process_num(char *str, char *base)
 	return ((int)total);
 }
 
-int ft_atoi_base(char *str, char *base)
+int	ft_atoi_base(char *str, char *base)
 {
-		int result;
-		int negative;
+	int	result;
+	int	negative;
 
-		result = 0;
-		negative = 1;
-		while (!ft_is_num(*str, base) && *str)
+	result = 0;
+	negative = 1;
+	while (!ft_is_num(*str, base) && *str)
+	{
+		if (*str == '-')
 		{
-			if (*str == '-')
-			{
-				negative *= -1;
-			}
-			str++;
+			negative *= -1;
 		}
-		result = ft_process_num(str, base);
-		return (result * negative);
+		str++;
+	}
+	result = ft_process_num(str, base);
+	return (result * negative);
 }
