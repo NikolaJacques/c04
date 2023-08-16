@@ -6,7 +6,7 @@
 /*   By: nikjacqu <nikjacqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 20:40:06 by nikjacqu          #+#    #+#             */
-/*   Updated: 2023/08/15 20:42:16 by nikjacqu         ###   ########.fr       */
+/*   Updated: 2023/08/16 14:05:57 by nikjacqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@ int	is_num(char c)
 	return (c >= '0' && c <= '9');
 }
 
+/*
+** if condition checks if preceding string is a plus or minus
+** if not, returns 0
+*/
 int	process_num(char *str)
 {
 	double	multiplier;
@@ -22,13 +26,16 @@ int	process_num(char *str)
 
 	multiplier = 1;
 	total = 0;
-	while (is_num(*str))
+	if (*(str - 1) == '-' || *(str - 1) == '+')
 	{
-		multiplier /= 10;
-		total += (*str - 48) * multiplier;
-		str++;
+		while (is_num(*str))
+		{
+			multiplier /= 10;
+			total += (*str - 48) * multiplier;
+			str++;
+		}
+		total /= multiplier;
 	}
-	total /= multiplier;
 	return ((int)total);
 }
 

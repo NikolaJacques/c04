@@ -6,26 +6,38 @@
 
 void test00()
 {
-    printf("\ntest 00:\n");
+    printf("\ntest strlen:\n");
     char *str = "0123456789";
-	printf("%d", ft_strlen(str));
+	printf("10 : %d\n", ft_strlen(str));
+    char *str1 = "";
+	printf("0 : %d\n", ft_strlen(str1));
+    char *str2 = NULL;
+	printf("0 : %d\n", ft_strlen(str2));
+    char *str3 = "\t";
+	printf("1 : %d\n", ft_strlen(str3));
     printf("\n");
 }
 
 void test01()
 {
-    printf("\ntest 01:\n");
+    printf("\ntest putchar:\n");
     char *str = "Some string";
 	ft_putstr(str);
+    char *str1 = NULL;
+	ft_putstr(str1);
+    char *str2 = "";
+	ft_putstr(str2);
     printf("\n");
 }
 
 void test02()
 {
-    printf("\ntest 02:\n");
-    ft_putnbr(1234);
+    printf("\ntest putnbr:\n");
+    ft_putnbr(42);
     printf("\n");
     ft_putnbr(-2147483648);
+    printf("\n");
+    ft_putnbr(2147483647);
     printf("\n");
 }
 
@@ -42,28 +54,34 @@ void test03()
 
     i = ft_atoi("    -12034 ab567   ");
     printf("-12034 : %d\n", i);
+
+    i = ft_atoi("    - 1 2 3 4");
+    printf("0 : %d\n", i);
 }
 
 void test04()
 {
+    printf("\ntest len_base:\n");
+    printf("2 : %d\n", len_base("01"));
+    printf("16 : %d\n", len_base("0123456789ABCDEF"));
+    printf("8 : %d\n", len_base("poneyvif"));
+    printf("0 : %d\n", len_base("0123456789AB2DEF"));
+    printf("0 : %d\n", len_base("pon+yvif"));
+    printf("0 : %d\n", len_base(""));
     printf("\ntest putnbr_base:\n");
     ft_putnbr_base(42, "01");
     printf("\n");
-	ft_putnbr_base(42, "0123456789ABCDEF");
+	ft_putnbr_base(42, "012345678ABCDEF");
     printf("\n");
 	ft_putnbr_base(42, "poneyvif");
     printf("\n");
+    ft_putnbr_base(42, "");
+    printf("\n");
+	ft_putnbr_base(42, "0123456789AB2DEF");
+    printf("\n");
+	ft_putnbr_base(42, "pon+yvif");
+    printf("\n");
 }
-
-   void test50()
-    {
-	    printf("test 00\n");
-	    printf("0 : %d\n", ft_is_num('z', "0123456789ABCDEF"));
-	    printf("1 : %d\n", ft_is_num('6', "0123456789ABCDEF"));
-	    printf("1 : %d\n", ft_is_num('F', "0123456789ABCDEF"));
-	    printf("0 : %d\n", ft_is_num(':', "0123456789ABCDEF"));
-	    printf("0 : %d\n", ft_is_num(' ', "0123456789ABCDEF"));
-    }
 
     void test51()
     {
@@ -79,6 +97,7 @@ void test04()
     {
 	    printf("test 02\n");
 	    printf("11 : %d\n", ft_get_len_str("06594A1D54F  +-plogh===", "0123456789ABCDEF"));
+        printf("6 : %d\n", ft_get_len_str("101010ab", "01"));
     }
 
     void test53()
@@ -89,6 +108,7 @@ void test04()
 
 void test05()
 {
+    printf("test global\n");
     printf("42 : %d\n", ft_atoi_base(" -++-101010ab", "01"));
 	printf("-42 : %d\n", ft_atoi_base("   +-2Axy", "0123456789ABCDEF"));
 	printf("-42 : %d\n", ft_atoi_base(" ---vnax8", "poneyvif"));
@@ -104,7 +124,6 @@ int main(void)
     test03();
     test04();
     printf("\ntest atoi_base:\n");
-    test50();
 	test51();
 	test52();
 	test53();

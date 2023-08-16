@@ -6,32 +6,60 @@
 /*   By: nikjacqu <nikjacqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 20:43:30 by nikjacqu          #+#    #+#             */
-/*   Updated: 2023/08/15 20:45:04 by nikjacqu         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:08:24 by nikjacqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_is_num(char ch, char *base)
+int	get_len_base(char *base)
 {
-	while (*base)
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 1;
+	while (base[i])
 	{
-		if (ch == *base)
-			return (1);
-		base++;
+		if (base[i] == '-' || base[i] == '+')
+			return (0);
+		while (base[i + j])
+		{
+			if (i == 0)
+				break ;
+			if (base[i] == base[i + j])
+				return (0);
+			j++;
+		}
+		j = 1;
+		i++;
 	}
-	return (0);
+	return (i);
 }
 
 int	ft_get_len_str(char *str, char *base)
 {
-	int	len;
+	int	i;
+	int	j;
+	int	is_num;
 
-	len = 0;
-	while (ft_is_num(*str, base))
-	{	
-		len++;
-		str++;
+	i = 0;
+	j = 0;
+	is_num = 1;
+	while (str[i] && is_num)
+	{
+		is_num = 0;
+		while (base[j])
+		{
+			if (str[i] == base[j])
+			{
+				is_num = 1;
+				break ;
+			}
+			j++;
+		}
+		j = 0;
+		i++;
 	}
-	return (len);
+	return (i - 1);
 }
 
 int	ft_convert(char ch, char *base, int len_base)
@@ -52,7 +80,7 @@ int	ft_process_num(char *str, char *base)
 {
 	int	multiplier;
 	int	total;
-	int	len_base;
+	int	len_b;
 	int	len_str;
 	int	i;
 
@@ -60,18 +88,14 @@ int	ft_process_num(char *str, char *base)
 	len_str = ft_get_len_str(str, base);
 	if (len_str == 0)
 		return (0);
-	while (base[i])
-	{
-		i++;
-	}
-	len_base = i;
+	len_b = get_len_base(base);
 	multiplier = 1;
 	total = 0;
 	while (len_str > 0)
 	{
-		total += ft_convert(str[len_str - 1], base, len_base) * multiplier;
+		total += ft_convert(str[len_str - 1], base, len_b) * multiplier;
 		len_str--;
-		multiplier *= len_base;
+		multiplier *= len_b;
 	}
 	return ((int)total);
 }
@@ -80,17 +104,26 @@ int	ft_atoi_base(char *str, char *base)
 {
 	int	result;
 	int	negative;
+	int	is_num;
+	int	i;
+	int	j;
 
+	i = -1;
+	j = -1;
 	result = 0;
 	negative = 1;
-	while (!ft_is_num(*str, base) && *str)
+	is_num = 0;
+	while (str[++i] && !is_num)
 	{
-		if (*str == '-')
+		while (base[++j])
 		{
-			negative *= -1;
+			if (*str == '-')
+				negative *= -1;
+			if (str[i] == base[j])
+				is_num = 1;
 		}
-		str++;
+		j = 0;
 	}
-	result = ft_process_num(str, base);
+	result = ft_process_num(str + i - 1, base);
 	return (result * negative);
 }
